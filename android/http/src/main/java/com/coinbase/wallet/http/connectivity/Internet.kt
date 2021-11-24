@@ -69,7 +69,10 @@ object Internet : BroadcastReceiver() {
                     return@map
                 }
 
-                status = if (activeNetworkInfo?.isConnected == true && isServerReachable()) {
+                status = if (activeNetworkInfo?.isConnected == true) {
+                    // isServerReachable may cause isConnect fail in some areas
+//                 status = if (activeNetworkInfo?.isConnected == true && isServerReachable()) {
+                    
                     getStatus(cm.getNetworkCapabilities(activeNetwork))
                 } else {
                     ConnectionStatus.Offline
